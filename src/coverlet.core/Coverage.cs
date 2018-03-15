@@ -56,6 +56,7 @@ namespace Coverlet.Core
                 InstrumentationHelper.RestoreOriginalModule(result.ModulePath, _identifier);
             }
 
+            File.AppendAllText("output.txt", modules.Count.ToString() + "\n");
             return new CoverageResult
             {
                 Identifier = _identifier,
