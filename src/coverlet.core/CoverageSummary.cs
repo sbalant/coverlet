@@ -12,6 +12,7 @@ namespace Coverlet.Core
         public CoverageSummaryResult CalculateSummary()
         {
             CoverageSummaryResult result = new CoverageSummaryResult();
+            int totalModuleLines = 0, moduleLinesCovered = 0;
 
             foreach (var mod in _result.Modules)
             {
@@ -31,10 +32,11 @@ namespace Coverlet.Core
                         }
                     }
                 }
-
+                totalModuleLines += totalLines;
+                moduleLinesCovered += linesCovered;
                 result.Add(System.IO.Path.GetFileNameWithoutExtension(mod.Key), (linesCovered * 100) / totalLines);
             }
-
+            result.Add("Covered", (moduleLinesCovered * 100) / totalModuleLines);
             return result;
         }
     }
